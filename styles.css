@@ -1,0 +1,24 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('./assets/banner.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.banner * {
+    font-size: 36px;
+    color: #FFF;
+    background-color: black;
+}
