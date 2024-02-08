@@ -130,7 +130,7 @@
                     //window.location.replace(urlParams.targetUrl);
 
                     document.querySelector("#btn").addEventListener('click', ()=>{
-                        gtag('event', 'click', {
+/*                         gtag('event', 'click', {
                             'event_category': 'alfac_data',
                             'event_label': {
                                 adId: urlParams.adId,
@@ -140,7 +140,15 @@
                                 console.log('Processou o gtag');
                                 resolve();
                             }
-                         });
+                         }); */
+
+                         gtag('event', 'clique_botao', {
+                            'string_customizada_1': urlParams.adId,  // Primeira string personalizada
+                            'string_customizada_2': urlParams.targetUrl,  // Segunda string personalizada
+                            // Outros parâmetros conforme necessário
+                        });
+
+                        alert(clicou)
                     })
 
 
