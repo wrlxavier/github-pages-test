@@ -15,6 +15,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs/dist/fp.min.js"></script>
 
+    <div id="btn">Clique aqui</div>
+
     <script>
         
         function getUrlParams() {
@@ -32,7 +34,6 @@
             }
         }
 
-        
         function loadGoogleAnalytics(id) {
             var script = document.createElement('script');
             script.async = true;
@@ -126,7 +127,23 @@
             Promise.all([asyncAlfac(alfacConfig), asyncGtag(urlParams)])
                 .then(() => {
                     clearTimeout(fallbackTimer);
-                    window.location.replace(urlParams.targetUrl);
+                    //window.location.replace(urlParams.targetUrl);
+
+                    document.querySelector("#btn").addEventListener('click', ()=>{
+                        gtag('event', 'click', {
+                            'event_category': 'alfac_data',
+                            'event_label': {
+                                adId: urlParams.adId,
+                                targetUrl: urlParams.targetUrl
+                            },
+                            'event_callback': function() {
+                                console.log('Processou o gtag');
+                                resolve();
+                            }
+                         });
+                    })
+
+
                 });
         }
 
