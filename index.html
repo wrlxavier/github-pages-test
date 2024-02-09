@@ -74,12 +74,9 @@
 
         function asyncGtag(urlParams) {
             return new Promise((resolve) => {
-                gtag('event', 'redirect', {
-                    'event_category': 'alfac_data',
-                    'event_label': {
-                        adId: urlParams.adId,
-                        targetUrl: urlParams.targetUrl
-                    },
+                gtag('event', 'redirecionamento_teste', {
+                    'adId': urlParams.adId,
+                    'targetUrl': urlParams.targetUrl,
                     'event_callback': function() {
                         console.log('Processou o gtag');
                         resolve();
