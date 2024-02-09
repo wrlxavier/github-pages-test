@@ -2,6 +2,16 @@
 <html lang="en">
 <head>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZWP42SKD93"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZWP42SKD93');
+    </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs/dist/fp.min.js"></script>
 
@@ -102,13 +112,14 @@
         if (isCommomUser && nonZeroParams) {
         
             /*------- Google tag (gtag.js) -------*/
-            loadGoogleAnalytics(urlParams.gaId);
+            /*loadGoogleAnalytics(urlParams.gaId);*/
     
             /*------- Google tag config -------*/
-            window.dataLayer = window.dataLayer || [];
+            /*window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', urlParams.gaId);
+            gtag('config', urlParams.gaId);*/
+            
     
             const fallbackTimer = setTimeout(() => {
                 //window.location.replace(urlParams.targetUrl);
