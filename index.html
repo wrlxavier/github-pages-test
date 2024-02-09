@@ -2,15 +2,6 @@
 <html lang="en">
 <head>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZWP42SKD93"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-ZWP42SKD93');
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs/dist/fp.min.js"></script>
 
@@ -83,11 +74,14 @@
 
         function asyncGtag(urlParams) {
             return new Promise((resolve) => {
-                gtag('event', 'redirecionamento', {
-                    'ad_id': urlParams.adId,
-                    'target_url': urlParams.targetUrl,
+                gtag('event', 'redirect', {
+                    'event_category': 'alfac_data',
+                    'event_label': {
+                        adId: urlParams.adId,
+                        targetUrl: urlParams.targetUrl
+                    },
                     'event_callback': function() {
-                        console.log('Aeeee, foiii');
+                        console.log('Processou o gtag');
                         resolve();
                     }
                 });
@@ -109,7 +103,16 @@
         const nonZeroParams = getParmsStatus(urlParams)
 
         if (isCommomUser && nonZeroParams) {
-           
+        
+            /*------- Google tag (gtag.js) -------*/
+            loadGoogleAnalytics(urlParams.gaId);
+    
+            /*------- Google tag config -------*/
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', urlParams.gaId);
+    
             const fallbackTimer = setTimeout(() => {
                 window.location.replace(urlParams.targetUrl);
             }, 2000);
