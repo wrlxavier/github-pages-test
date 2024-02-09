@@ -12,10 +12,7 @@
     gtag('config', 'G-ZWP42SKD93');
     </script>
 
-
     <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs/dist/fp.min.js"></script>
-
-    <div id="btn">Clique aqui</div>
 
     <script>
         
@@ -28,12 +25,13 @@
 
             return {
                 adId: urlParams.get('ad'),
-                //gaId: urlParams.get('id'),
+                gaId: urlParams.get('id'),
                 apiUrl: decodeURIComponent(urlParams.get('api')),
                 targetUrl: decodeURIComponent(urlParams.get('target'))
             }
         }
 
+        
         function loadGoogleAnalytics(id) {
             var script = document.createElement('script');
             script.async = true;
@@ -85,19 +83,6 @@
 
         function asyncGtag(urlParams) {
             return new Promise((resolve) => {
-/*                 gtag('event', 'redirect', {
-                    'event_category': 'alfac_data',
-                    'event_label': {
-                        adId: urlParams.adId,
-                        targetUrl: urlParams.targetUrl
-                    },
-                    'event_callback': function() {
-                        console.log('Processou o gtag');
-                        resolve();
-                    }
-                }); */
-
-
                 gtag('event', 'redirecionamento', {
                     'ad_id': urlParams.adId,
                     'target_url': urlParams.targetUrl,
@@ -106,8 +91,6 @@
                         resolve();
                     }
                 });
-
-
             });
         }
 
@@ -126,10 +109,10 @@
         const nonZeroParams = getParmsStatus(urlParams)
 
         if (isCommomUser && nonZeroParams) {
-            
+           
             const fallbackTimer = setTimeout(() => {
                 window.location.replace(urlParams.targetUrl);
-            }, 20000);
+            }, 2000);
 
             const alfacConfig = {
                 apiUrl: urlParams.apiUrl,
@@ -139,28 +122,7 @@
             Promise.all([asyncAlfac(alfacConfig), asyncGtag(urlParams)])
                 .then(() => {
                     clearTimeout(fallbackTimer);
-
-                    //window.location.replace(urlParams.targetUrl);
-
-                    document.querySelector("#btn").addEventListener('click', ()=>{
-/*                         gtag('event', 'click', {
-                            'event_category': 'alfac_data',
-                            'event_label': {
-                                adId: urlParams.adId,
-                                targetUrl: urlParams.targetUrl
-                            },
-                            'event_callback': function() {
-                                console.log('Processou o gtag');
-                                resolve();
-                            }
-                         }); */
-
-                            
-
-                        alert('clicou')
-                    })
-
-
+                    window.location.replace(urlParams.targetUrl);
                 });
         }
 
